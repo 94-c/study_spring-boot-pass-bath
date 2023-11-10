@@ -16,7 +16,7 @@ public class PackageEntity extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer packageSeq;
+    private Long packageSeq;
 
     private String packageName;
     private Integer count;
