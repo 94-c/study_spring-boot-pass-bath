@@ -57,4 +57,22 @@ class PackageRepositoryTest {
         assertEquals(1, packageEntities.size());
         assertEquals(packageEntity1.getPackageSeq(), packageEntities.get(0).getPackageSeq());
     }
+
+    @Test
+    public void test_updateCountAndPeriod() {
+        // given
+        PackageEntity packageEntity = new PackageEntity();
+        packageEntity.setPackageName("바디프로필 이벤트 4개월");
+        packageEntity.setPeriod(90);
+        packageRepository.save(packageEntity);
+
+        // when
+        int updatedCount = packageRepository.updateCountAndPeriod(packageEntity.getPackageSeq(), 30, 60);
+        final PackageEntity updatePackageEntity = packageRepository.findById(packageEntity.getPackageSeq()).get();
+
+        // then
+        assertEquals(1, updatedCount);
+        assertEquals(30, updatePackageEntity.getCount());
+        assertEquals(120, updatePackageEntity.getPeriod());
+    }
 }
